@@ -10,69 +10,56 @@
 '''
 
 alfabeto = {
-    'A': 4,
+    'A': '4',
     'B': 'I3',
     'C': '[',
     'D': ')',
-    'E': 3,
+    'E': '3',
     'F': '|=',
     'G': '&',
     'H': '#',
-    'I': 1,
+    'I': '1',
     'J': ',_|',
     'K': '>|',
-    'L': 1,
+    'L': '1',
     'M': '/\\/\\',
     'N': '^/',
-    'O': 0,
+    'O': '0',
     'P': '|*',
     'Q': '(_,)',
     'R': 'I2',
-    'S': 5,
-    'T': 7,
+    'S': '5',
+    'T': '7',
     'U': '(_)',
     'V': '\/',
     'W': '\\/\/',
     'X': '><',
     'Y': 'j',
-    'Z': 2,
-    1: 'L',
-    2: 'R',
-    3: 'E',
-    4: 'A',
-    5: 'S',
-    6: 'b',
-    7: 'T',
-    8: 'B',
-    9: 'g',
-    0: 'o',
+    'Z': '2',
+    '1': 'L',
+    '2': 'R',
+    '3': 'E',
+    '4': 'A',
+    '5': 'S',
+    '6': 'b',
+    '7': 'T',
+    '8': 'B',
+    '9': 'g',
+    '0': 'o',
 }
 
-# Retorna una lista de caracteres en base a la lista de palabras recibidas.
-def returnToCharacterList(words_list):
-    charList = []
-    for word in words_list:
-        charList.extend([c for c in word])
-        charList.append(" ")
+def convertTxtToLangLeet(texto):
+    nuevoTexto = ""
+    # Validamos que se haya ingresado un texto    
+    for c in texto:
+        if c == " ":
+            nuevoTexto += f"{str(c)}"
+            
+        if c in alfabeto.keys():
+            nuevoTexto += f"{alfabeto[str(c)]}"
+        
+    return nuevoTexto
 
-    return charList
-
-
-def convertTextToLeetSpeak(cadena):
-    charList = returnToCharacterList(cadena)
-    result = []
-    for char in charList:
-        if char == ' ':
-            result.append(char)
-            continue
-
-        if char in alfabeto.keys():
-            result.append(alfabeto[char])
-        elif char.isnumeric():
-            char = int(char)
-            result.append(alfabeto[char])
-
-    return result
 
 
 def main():
@@ -81,28 +68,15 @@ def main():
     print("Bienvenidx. \n\n Este es un software que te permite traducir un mensaje escrito en lenguaje natural a lenguaje leet (1337).\n\n")
 
     # Solicitamos al usuario que ingrese el texto que desea transformar y las convertimos en mayusculas
-    text = input('Mensaje: ').upper()
-
-    # Validamos que se haya ingresado un text 
-    if len(text) == 0:
-        print('Error. Debes ingresar al menos un caracter.')
-        exit()
+    mensaje = input('Mensaje: ').upper()
     
-    # Quitamos los espacios al inicio y final del texto
-    text = text.strip()
-    
-    print("Mensaje ingresado:\n", text, "\n")
+    print("\n")
+    print("_" * 70)
 
-    # Separamos por palabras el texto ingresado
-    words_list = text.split(sep=" ")
-    
-    # Transformamos el mensaje mediante la función convertTextToLeetSpeak que recibe como argumento el texto ingresado. Retorna una lista.
-    msg_leet_on_list = convertTextToLeetSpeak(words_list)
+    traduccion = convertTxtToLangLeet(mensaje)
 
-    # Aplicando el metodo .join(<iterable>), que recibe un iterable como argumento, le podemos pasar un list comprehension para transformar un list a un string
-    mensaje_leet = "".join([str(c) for c in msg_leet_on_list]).strip()
-
-    print("Mensaje 1337 (or leet):\n", mensaje_leet, "\n")
+    print(traduccion)
+    print("\n")
 
 
 if __name__ == '__main__':
