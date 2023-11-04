@@ -60,8 +60,6 @@ def convertTxtToLangLeet(texto):
         
     return nuevoTexto
 
-
-
 def main():
     # Mensaje de bienvenida
     print("\n")
